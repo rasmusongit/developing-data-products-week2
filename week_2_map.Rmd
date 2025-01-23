@@ -1,0 +1,34 @@
+---
+title: "Simple map"
+author: "Rasmus Klitgaard"
+date: "`date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Developing data products, Week 2 assignment
+## A simple map
+
+
+First we load in leaflet.
+```{r}
+library(leaflet)
+```
+Then, we highlight some interesting places
+```{r}
+interesting_places<-data.frame(
+    latitude=c(43.1401, 45.9053),
+    longitude=c(141.2978, 13.3100),
+    name=c("Sapporo, Japan", "Piazza Grande, Palmanova, Italia"))
+```
+And now we put them on the map!
+```{r}
+map <- interesting_places %>% leaflet() %>% addTiles() %>% addMarkers(popup =interesting_places$name,clusterOptions = markerClusterOptions())
+```
+And now we show the map!
+```{r}
+map
+```
